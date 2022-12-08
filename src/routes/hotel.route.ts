@@ -6,7 +6,7 @@ import {
   UpdateHotelHandler,
   deleteHotelHandler,
   getAllHotelsHandler,
-} from "../controllers/hotel.controller";
+} from "../controllers";
 import { validate } from "../middleware/validation";
 import { createHotelSchema } from "../schemas/hotel.schema";
 

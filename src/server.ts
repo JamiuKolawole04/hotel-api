@@ -4,24 +4,32 @@ import { NextFunction, Request, Response } from "express";
 import express from "express";
 import cors from "cors";
 import { set } from "mongoose";
+import fileUpload from "express-fileupload";
 
 import { connectDB } from "./db/db";
-import hotelRoute from "./routes/hotel.route";
 import { notFound } from "./middleware/not-found";
 import errorHandlerMiddleware from "./middleware/errorHandler";
+import imageRoute from "./routes/upload.route";
+import hotelRoute from "./routes/hotel.route";
 
 const app = express();
 const PORT = process.env.PORT;
 
 // middlewres
+set("strictQuery", false);
 app.use(express.json({ limit: "10mb" }));
 app.use(
   express.urlencoded({ extended: false, limit: "50mb", parameterLimit: 50000 })
 );
 app.use(cors());
-set("strictQuery", false);
+app.use(
+  fileUpload({
+    useTempFiles: true,
+  })
+);
 
 app.use("/api/hotel", hotelRoute);
+app.use("/api/image", imageRoute);
 
 app.get("/", async (_, res: Response) => {
   res.status(200).json({

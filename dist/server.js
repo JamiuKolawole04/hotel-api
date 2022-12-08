@@ -16,18 +16,24 @@ require("dotenv").config();
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const mongoose_1 = require("mongoose");
+const express_fileupload_1 = __importDefault(require("express-fileupload"));
 const db_1 = require("./db/db");
-const hotel_route_1 = __importDefault(require("./routes/hotel.route"));
 const not_found_1 = require("./middleware/not-found");
 const errorHandler_1 = __importDefault(require("./middleware/errorHandler"));
+const upload_route_1 = __importDefault(require("./routes/upload.route"));
+const hotel_route_1 = __importDefault(require("./routes/hotel.route"));
 const app = (0, express_1.default)();
 const PORT = process.env.PORT;
 // middlewres
+(0, mongoose_1.set)("strictQuery", false);
 app.use(express_1.default.json({ limit: "10mb" }));
 app.use(express_1.default.urlencoded({ extended: false, limit: "50mb", parameterLimit: 50000 }));
 app.use((0, cors_1.default)());
-(0, mongoose_1.set)("strictQuery", false);
+app.use((0, express_fileupload_1.default)({
+    useTempFiles: true,
+}));
 app.use("/api/hotel", hotel_route_1.default);
+app.use("/api/image", upload_route_1.default);
 app.get("/", (_, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.status(200).json({
         sucess: true,
