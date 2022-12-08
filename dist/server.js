@@ -13,14 +13,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 require("dotenv").config();
-require("dotenv/config");
 const express_1 = __importDefault(require("express"));
+const cors_1 = __importDefault(require("cors"));
+const mongoose_1 = require("mongoose");
 const db_1 = require("./db/db");
 const app = (0, express_1.default)();
 const PORT = process.env.PORT;
 // middlewres
 app.use(express_1.default.json({ limit: "10mb" }));
 app.use(express_1.default.urlencoded({ extended: false, limit: "50mb", parameterLimit: 50000 }));
+app.use((0, cors_1.default)());
+(0, mongoose_1.set)("strictQuery", false);
 app.get("/", (_, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.status(200).json({
         sucess: true,

@@ -10,5 +10,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createHotelHandler = void 0;
-const createHotelHandler = () => __awaiter(void 0, void 0, void 0, function* () { });
+const http_status_codes_1 = require("http-status-codes");
+const service_1 = require("../service");
+const createHotelHandler = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const hotel = yield (0, service_1.createHotel)(req.body);
+        if (hotel) {
+            return res.status(http_status_codes_1.StatusCodes.CREATED).json({
+                success: true,
+                message: "hotel created successfully",
+                data: hotel,
+            });
+        }
+    }
+    catch (err) {
+        console.log(err);
+        next(err);
+    }
+});
 exports.createHotelHandler = createHotelHandler;
