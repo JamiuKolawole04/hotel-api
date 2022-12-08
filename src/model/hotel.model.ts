@@ -10,22 +10,12 @@ interface HotelShema {
 const hotelSchema = new Schema<HotelShema>({
   name: {
     type: String,
-    required: true,
     minLength: 5,
   },
 
-  city: {
-    type: String,
-    required: true,
-  },
-  country: {
-    type: String,
-    required: true,
-  },
-  address: {
-    type: String,
-    required: true,
-  },
+  city: String,
+  country: String,
+  address: String,
 });
 
 export const hotelModel = model("Hotel", hotelSchema);

@@ -15,6 +15,7 @@ const validate = (schema) => (req, res, next) => {
         if (error instanceof zod_1.ZodError) {
             return res.status(400).json({
                 success: false,
+                status: "fail",
                 errors: error.errors,
             });
         }

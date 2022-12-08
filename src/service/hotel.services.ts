@@ -4,3 +4,28 @@ import { createHotelParams } from "./type";
 export const createHotel = async (data: createHotelParams) => {
   return hotelModel.create(data);
 };
+
+export const findHotelById = async (id: string) => {
+  return hotelModel.findById(id);
+};
+
+export const getAllHotels = async () => {
+  return hotelModel.find({});
+};
+
+export const updateHotelById = async (
+  id: string,
+  data: Partial<createHotelParams>
+) => {
+  return hotelModel.findByIdAndUpdate(
+    id,
+    {
+      $set: data,
+    },
+    { new: true }
+  );
+};
+
+export const deleteHotelById = async (id: string) => {
+  return hotelModel.findByIdAndDelete(id);
+};

@@ -6,6 +6,9 @@ import cors from "cors";
 import { set } from "mongoose";
 
 import { connectDB } from "./db/db";
+import hotelRoute from "./routes/hotel.route";
+import { notFound } from "./middleware/not-found";
+import errorHandlerMiddleware from "./middleware/errorHandler";
 
 const app = express();
 const PORT = process.env.PORT;
@@ -18,6 +21,8 @@ app.use(
 app.use(cors());
 set("strictQuery", false);
 
+app.use("/api/hotel", hotelRoute);
+
 app.get("/", async (_, res: Response) => {
   res.status(200).json({
     sucess: true,
@@ -25,13 +30,15 @@ app.get("/", async (_, res: Response) => {
   });
 });
 
+app.use(notFound);
+app.use(errorHandlerMiddleware);
+
+// starting server
 const start = async (): Promise<void> => {
   try {
-    // await connectDB("mongodb://localhost:27017/hotel-app");
     await connectDB(process.env.MONGO_URI!);
-
-    // await connectDB(process.env.MONGO_URI!);
     console.log("db connected");
+
     app.listen(PORT, () => console.log(`Server  listening on port ${PORT}...`));
   } catch (error) {
     console.log(error);
