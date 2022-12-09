@@ -11,6 +11,7 @@ import { notFound } from "./middleware/not-found";
 import errorHandlerMiddleware from "./middleware/errorHandler";
 import imageRoute from "./routes/upload.route";
 import hotelRoute from "./routes/hotel.route";
+import brandRoute from "./routes/brand.route";
 
 const app = express();
 const PORT = process.env.PORT;
@@ -30,6 +31,7 @@ app.use(
 
 app.use("/api/hotel", hotelRoute);
 app.use("/api/image", imageRoute);
+app.use("/api/brand", brandRoute);
 
 app.get("/", async (_, res: Response) => {
   res.status(200).json({

@@ -7,15 +7,18 @@ interface HotelShema {
   address: string;
 }
 
-const hotelSchema = new Schema<HotelShema>({
-  name: {
-    type: String,
-    minLength: 5,
-  },
+const hotelSchema = new Schema<HotelShema>(
+  {
+    name: {
+      type: String,
+      minLength: 5,
+    },
 
-  city: String,
-  country: String,
-  address: String,
-});
+    city: String,
+    country: String,
+    address: String,
+  },
+  { timestamps: true }
+);
 
 export const hotelModel = model("Hotel", hotelSchema);

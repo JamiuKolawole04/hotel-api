@@ -23,7 +23,7 @@ const errorHandlerMiddleware = (
     return res.status(400).json({
       success: false,
       status: "fail",
-      message: "hotel with this id does not exist",
+      message: "item with this id does not exist",
     });
   }
 

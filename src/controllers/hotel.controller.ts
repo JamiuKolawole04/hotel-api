@@ -27,7 +27,6 @@ export const createHotelHandler = async (
       });
     }
   } catch (err) {
-    console.log(err);
     next(err);
   }
 };
@@ -37,14 +36,18 @@ export const getAllHotelsHandler = async (
   res: Response,
   next: NextFunction
 ) => {
-  const hotels = await getAllHotels();
+  try {
+    const hotels = await getAllHotels();
 
-  res.status(StatusCodes.OK).json({
-    success: true,
-    status: "success",
-    nbHits: hotels.length,
-    data: hotels,
-  });
+    res.status(StatusCodes.OK).json({
+      success: true,
+      status: "success",
+      nbHits: hotels.length,
+      data: hotels,
+    });
+  } catch (err) {
+    next(err);
+  }
 };
 
 export const getSingleHotelHandler = async (
