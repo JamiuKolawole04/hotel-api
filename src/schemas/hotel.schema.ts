@@ -15,5 +15,8 @@ export const createHotelSchema = object({
     address: string({
       required_error: "hotel address is required",
     }),
+    image: string({
+      required_error: "image is required",
+    }),
   }),
 });

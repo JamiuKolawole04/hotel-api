@@ -7,6 +7,7 @@ import {
   updateHotelById,
   deleteHotelById,
   getAllHotels,
+  findHotelByName,
 } from "../service";
 import { createHotelParams } from "../service/type";
 import AppError from "../utils/appError";
@@ -17,7 +18,15 @@ export const createHotelHandler = async (
   next: NextFunction
 ) => {
   try {
-    const hotel = await createHotel(req.body);
+    const { name } = req.body;
+
+    let hotel: any = await findHotelByName(name);
+
+    if (hotel) {
+      return next(new AppError(409, "hotel already exists"));
+    }
+
+    hotel = await createHotel(req.body);
     if (hotel) {
       return res.status(StatusCodes.CREATED).json({
         success: true,

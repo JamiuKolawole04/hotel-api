@@ -5,6 +5,7 @@ interface HotelShema {
   city: string;
   country: string;
   address: string;
+  image: string;
 }
 
 const hotelSchema = new Schema<HotelShema>(
@@ -12,11 +13,13 @@ const hotelSchema = new Schema<HotelShema>(
     name: {
       type: String,
       minLength: 5,
+      unique: true,
     },
 
     city: String,
     country: String,
     address: String,
+    image: String,
   },
   { timestamps: true }
 );

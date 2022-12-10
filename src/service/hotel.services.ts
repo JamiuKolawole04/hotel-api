@@ -9,6 +9,10 @@ export const findHotelById = async (id: string) => {
   return hotelModel.findById(id);
 };
 
+export const findHotelByName = async (name: string) => {
+  return hotelModel.findOne({ name: name });
+};
+
 export const getAllHotels = async () => {
   return hotelModel.find({});
 };

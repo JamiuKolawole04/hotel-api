@@ -3,6 +3,7 @@ export interface createHotelParams {
   city: string;
   country: string;
   address: string;
+  image: string;
 }
 
 export interface createBrandShema {
