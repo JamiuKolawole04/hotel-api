@@ -14,7 +14,7 @@ export const findHotelByName = async (name: string) => {
 };
 
 export const getAllHotels = async () => {
-  return hotelModel.find({});
+  return hotelModel.find({}).sort("-createdAt");
 };
 
 export const updateHotelById = async (
