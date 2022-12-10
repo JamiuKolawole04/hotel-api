@@ -19,6 +19,7 @@ export const createHotelHandler = async (
 ) => {
   try {
     const { name } = req.body;
+    let brand = req.body.brand;
 
     let hotel: any = await findHotelByName(name);
 
@@ -26,7 +27,10 @@ export const createHotelHandler = async (
       return next(new AppError(409, "hotel already exists"));
     }
 
-    hotel = await createHotel(req.body);
+    hotel = await createHotel({
+      ...req.body,
+      brand: brand.toLocaleLowerCase(),
+    });
     if (hotel) {
       return res.status(StatusCodes.CREATED).json({
         success: true,

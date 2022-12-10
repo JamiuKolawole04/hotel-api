@@ -21,5 +21,8 @@ export const createHotelSchema = object({
     pricePerNight: string({
       required_error: "price per night is required",
     }),
+    brand: string({
+      required_error: "brand name  is required",
+    }),
   }),
 });

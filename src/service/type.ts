@@ -4,6 +4,7 @@ export interface createHotelParams {
   country: string;
   address: string;
   image: string;
+  brand: string;
 }
 
 export interface createBrandShema {
