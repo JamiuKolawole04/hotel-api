@@ -6,6 +6,7 @@ interface HotelShema {
   country: string;
   address: string;
   image: string;
+  pricePerNight: string;
 }
 
 const hotelSchema = new Schema<HotelShema>(
@@ -20,6 +21,7 @@ const hotelSchema = new Schema<HotelShema>(
     country: String,
     address: String,
     image: String,
+    pricePerNight: String,
   },
   { timestamps: true }
 );

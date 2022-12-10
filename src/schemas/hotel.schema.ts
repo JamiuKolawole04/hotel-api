@@ -18,5 +18,8 @@ export const createHotelSchema = object({
     image: string({
       required_error: "image is required",
     }),
+    pricePerNight: string({
+      required_error: "price per night is required",
+    }),
   }),
 });
