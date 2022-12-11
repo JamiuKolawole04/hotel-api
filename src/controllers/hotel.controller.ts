@@ -20,12 +20,14 @@ export const createHotelHandler = async (
   try {
     const { name, city, country, address } = req.body;
     if (
-      name.length < 0 ||
-      city.length < 0 ||
-      country.length < 0 ||
-      address.length < 0
+      name.length < 3 ||
+      city.length < 3 ||
+      country.length < 3 ||
+      address.length < 3
     ) {
-      return next(new AppError(400, "please fill all inputs"));
+      return next(
+        new AppError(400, "all required fields  must be above 3 letters word")
+      );
     }
     let brand = req.body.brand;
 
