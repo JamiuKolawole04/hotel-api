@@ -30,6 +30,9 @@ export const createHotelHandler = async (
       );
     }
     let brand = req.body.brand;
+    if (!brand || brand.length < 3) {
+      return next(new AppError(400, "please select brand"));
+    }
 
     let hotel: any = await findHotelByName(name);
 
