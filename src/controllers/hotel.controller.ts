@@ -67,8 +67,18 @@ export const getAllHotelsHandler = async (
   res: Response,
   next: NextFunction
 ) => {
+  interface QueryObj {
+    brand?: string;
+  }
   try {
-    const hotels = await getAllHotels();
+    const brand = req.query.brand as string;
+    const querObj: QueryObj = {};
+
+    if (brand) {
+      querObj.brand = brand;
+    }
+
+    const hotels = await getAllHotels({ ...querObj });
 
     res.status(StatusCodes.OK).json({
       success: true,

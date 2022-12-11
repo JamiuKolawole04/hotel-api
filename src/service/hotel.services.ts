@@ -13,8 +13,8 @@ export const findHotelByName = async (name: string) => {
   return hotelModel.findOne({ name: name });
 };
 
-export const getAllHotels = async () => {
-  return hotelModel.find({}).sort("-createdAt");
+export const getAllHotels = async (data: any) => {
+  return hotelModel.find(data).sort("-createdAt");
 };
 
 export const updateHotelById = async (
