@@ -95,6 +95,16 @@ export const updateBrandHandler = async (
     } = req;
     const brand = await updateBrandById(id, req.body);
 
+    if (
+      brand?.name === "bellagio" ||
+      brand?.name === "kroger" ||
+      brand?.name === "vanetian"
+    ) {
+      return next(
+        new AppError(403, "default brands cannot be modified or deleted")
+      );
+    }
+
     if (!brand) {
       return next(
         new AppError(404, "cannot update brand as brand does not exist")
@@ -119,9 +129,19 @@ export const deleteBrandHandler = async (
 ) => {
   try {
     const id: string = req.params.id;
-    const hotel = await deleteBrandById(id);
+    const brand = await deleteBrandById(id);
 
-    if (!hotel) {
+    if (
+      brand?.name === "bellagio" ||
+      brand?.name === "kroger" ||
+      brand?.name === "vanetian"
+    ) {
+      return next(
+        new AppError(403, "default brands cannot be modified or deleted")
+      );
+    }
+
+    if (!brand) {
       return next(
         new AppError(404, "fail to delete this brand as it does not exist")
       );
