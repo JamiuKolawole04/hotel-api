@@ -93,7 +93,18 @@ export const updateBrandHandler = async (
     const {
       params: { id },
     } = req;
-    const brand = await updateBrandById(id, req.body);
+
+    let brand = await findBrandById(id);
+    if (
+      brand?.name === "bellagio" ||
+      brand?.name === "kroger" ||
+      brand?.name === "vanetian"
+    ) {
+      return next(
+        new AppError(403, "default brands cannot be modified or deleted")
+      );
+    }
+    brand = await updateBrandById(id, req.body);
 
     if (
       brand?.name === "bellagio" ||
@@ -129,7 +140,17 @@ export const deleteBrandHandler = async (
 ) => {
   try {
     const id: string = req.params.id;
-    const brand = await deleteBrandById(id);
+    let brand = await findBrandById(id);
+    if (
+      brand?.name === "bellagio" ||
+      brand?.name === "kroger" ||
+      brand?.name === "vanetian"
+    ) {
+      return next(
+        new AppError(403, "default brands cannot be modified or deleted")
+      );
+    }
+    brand = await deleteBrandById(id);
 
     if (
       brand?.name === "bellagio" ||
