@@ -7,14 +7,13 @@ interface HotelShema {
   address: string;
   image: string;
   pricePerNight: string;
-  brand: string
+  brand: string;
 }
 
 const hotelSchema = new Schema<HotelShema>(
   {
     name: {
       type: String,
-      minLength: 5,
       unique: true,
     },
 

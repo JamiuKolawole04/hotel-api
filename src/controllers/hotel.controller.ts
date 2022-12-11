@@ -18,7 +18,15 @@ export const createHotelHandler = async (
   next: NextFunction
 ) => {
   try {
-    const { name } = req.body;
+    const { name, city, country, address } = req.body;
+    if (
+      name.length < 0 ||
+      city.length < 0 ||
+      country.length < 0 ||
+      address.length < 0
+    ) {
+      return next(new AppError(400, "please fill all inputs"));
+    }
     let brand = req.body.brand;
 
     let hotel: any = await findHotelByName(name);
